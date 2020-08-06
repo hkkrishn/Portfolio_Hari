@@ -1,14 +1,13 @@
 import React,{Component} from 'react'
-import Header from '../components/Header'
+import BaseLayout from '../components/layouts/baselayout'
 
-
+//class component that holds the base layout component as well as information of page that is passed down as props.children
 class Index extends Component{
   render(){
     return(
-      <div>
-        Hello Hari
-        <Header/>
-      </div>
+      <BaseLayout>
+        <h1>Hello Hari</h1>
+      </BaseLayout>
     )
   }
 }

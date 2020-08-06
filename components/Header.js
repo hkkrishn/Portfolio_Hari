@@ -1,11 +1,13 @@
 import React,{Component} from 'react'
 import Link from 'next/link'
 
+
+//Header React class component that uses the Next.js Link Component to create a tags or links to all other pages
 class Header extends Component{
     render(){
         return(
             <React.Fragment>
-            <div>
+
             <Link href = "/">
                 <a>Home</a>
             </Link>
@@ -21,7 +23,7 @@ class Header extends Component{
             <Link href = "/cv">
                 <a>CV</a>
             </Link>
-            </div>
+
             </React.Fragment>
         )
     }

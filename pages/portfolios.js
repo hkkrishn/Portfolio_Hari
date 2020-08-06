@@ -1,14 +1,14 @@
 import React,{Component} from 'react'
-import Header from '../components/Header'
+import BaseLayout from '../components/layouts/baselayout'
 
+//class component that holds the base layout component as well as information of page that is passed down as props.children
 
 class Portfolios extends Component{
   render(){
     return(
-      <div>
-        I am Portfolios Page
-        <Header/>
-      </div>
+      <BaseLayout>
+        <h1>I am Portfolios Page</h1>
+      </BaseLayout>
     )
   }
 }
