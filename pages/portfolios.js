@@ -2,15 +2,15 @@ import React,{Component} from 'react'
 import Header from '../components/Header'
 
 
-class Index extends Component{
+class Portfolios extends Component{
   render(){
     return(
       <div>
-        Hello Hari
+        I am Portfolios Page
         <Header/>
       </div>
     )
   }
 }
 
-export default Index;
+export default Portfolios;
