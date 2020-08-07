@@ -6,6 +6,7 @@
 import React,{Component} from 'react'
 import BaseLayout from '../components/layouts/baselayout'
 import axios from 'axios'
+import Link from 'next/link'
 
 //class component that holds the base layout component as well as information of page that is passed down as props.children
 
@@ -14,17 +15,29 @@ class Portfolios extends Component{
     static async getInitialProps(){
       let posts = []
       try{
-        const res = await axios.get("https://jsonplaceholder.typicode.com/posts")
+        const res = await axios.get(`https://jsonplaceholder.typicode.com/posts`)
         posts = res.data;
       }catch(err){
-          console.log(error)
+          console.log(err)
       }
       return{posts:posts.slice(0,10)};
   }
 
   //Function to render posts via li tags.
   renderPosts(posts){
-      return posts.map(post=><li key = {post.id}>{post.id}</li>)
+
+      return posts.map(post=>{
+        return(
+      <li style= {{fontSize:"20px"}} key = {post.id}>
+        <Link as = {`/portfolios/${post.id}`}  href = {`/portfolios/[id]`}>
+            <a>
+                {post.title}
+            </a>
+        </Link>
+      </li>
+        )
+
+    })
   }
   render(){
       const {posts}= this.props;
