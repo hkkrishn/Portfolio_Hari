@@ -1,3 +1,10 @@
+
+//Author:Harikrishnan Kuppusamykrishnan
+//Project: Portfolio Website
+//Date: 08/06/2020
+//Description: This is the BaseLayout wrapper component that wraps each page and the header component.
+
+
 import Header from '../Header'
 
 
@@ -8,6 +15,7 @@ const BaseLayout = props=>{
         <Header/>
         {props.children}
         </>
+
 
     )
 

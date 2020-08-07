@@ -1,3 +1,8 @@
+//Author:Harikrishnan Kuppusamykrishnan
+//Project: Portfolio Website
+//Date: 08/06/2020
+//Description: This is the main component that holds all pages.
+
 import React,{Component} from 'react'
 import BaseLayout from '../components/layouts/baselayout'
 

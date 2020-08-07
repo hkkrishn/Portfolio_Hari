@@ -1,3 +1,9 @@
+
+//Author:Harikrishnan Kuppusamykrishnan
+//Project: Portfolio Website
+//Date: 08/06/2020
+//Description: This is the blogs page within the site that will contain all blogs posts created by the user and render them for viewing.
+
 import React,{Component} from 'react'
 import BaseLayout from '../components/layouts/baselayout'
 

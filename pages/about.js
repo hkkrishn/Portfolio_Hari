@@ -1,3 +1,8 @@
+//Author:Harikrishnan Kuppusamykrishnan
+//Project: Portfolio Website
+//Date: 08/06/2020
+//Description: This is the about page within the site that will contain all information regarding me.
+
 import React,{Component} from 'react'
 import BaseLayout from '../components/layouts/baselayout'
 
