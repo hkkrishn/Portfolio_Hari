@@ -6,7 +6,8 @@
 import React,{Component} from 'react'
 import BaseLayout from '../components/layouts/baselayout'
 import axios from 'axios'
-import Link from 'next/link'
+// import Link from 'next/link'
+import {Link} from '../routes'
 
 //class component that holds the base layout component as well as information of page that is passed down as props.children
 
@@ -29,7 +30,7 @@ class Portfolios extends Component{
       return posts.map(post=>{
         return(
       <li style= {{fontSize:"20px"}} key = {post.id}>
-        <Link as = {`/portfolios/${post.id}`}  href = {`/portfolios/[id]`}>
+        <Link route = {`/portfolios/${post.id}`} >
             <a>
                 {post.title}
             </a>

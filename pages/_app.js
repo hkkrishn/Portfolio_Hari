@@ -8,6 +8,7 @@
 
 import '../styles/globals.css'
 import '../styles/main.scss'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 //Renders each page with its content

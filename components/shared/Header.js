@@ -13,10 +13,8 @@ class Header extends Component{
     render(){
         return(
             <React.Fragment>
-    <p className = "customClass">I am styled P element</p>
-    <p className = "customClassFromFile">I am styled P element</p>
             <Link href = "/">
-                <a style = {{fontSize:"20px"}}>Home</a>
+                <a>Home</a>
             </Link>
             <Link href = "/about">
                 <a>About</a>
@@ -30,14 +28,7 @@ class Header extends Component{
             <Link href = "/cv">
                 <a>CV</a>
             </Link>
-            <style jsx>
-                {`
-                    .customClass{
-                        color:red;
-                    }
-                    `
-                }
-            </style>
+
 
             </React.Fragment>
         )
