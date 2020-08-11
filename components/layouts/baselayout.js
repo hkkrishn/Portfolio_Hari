@@ -5,7 +5,7 @@
 //Description: This is the BaseLayout wrapper component that wraps each page and the header component.
 
 
-import Header from '../Header'
+import Header from '../shared/Header'
 
 
 //React functional component that holds both the page information passed as props.children and the Header Component, displayed on each page.

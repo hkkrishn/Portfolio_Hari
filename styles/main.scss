@@ -1,3 +1,5 @@
-.customClassFromFile{
-    color:blue;
-}
+@import './shared/fonts';
+
+  html, body {
+    font-family: 'Montserrat', 'Helvetica' !important;
+  }
