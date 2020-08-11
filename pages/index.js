@@ -6,7 +6,8 @@
 import React,{Component} from 'react'
 import BaseLayout from '../components/layouts/baselayout'
 import { Container, Row, Col } from 'reactstrap';
-
+import Typed from 'react-typed'
+const Roles = ['Developer','Tech Lover',"React.js","Next.js","AWS","Node.js","Python","Rust","Microservices"]
 //class component that holds the base layout component as well as information of page that is passed down as props.children
 class Index extends Component{
   render(){
@@ -43,10 +44,25 @@ class Index extends Component{
                     Welcome,<br/>I am Harikrishnan and this is my online<br/> portfolio
 
                   </h1>
+                  <br/>
+                  <Typed
+                  loop
+                    strings={Roles}
+                        typeSpeed={70}
+                        backSpeed={70}
+                        backDelay = {1000}
+                        loopCount = {0}
+                        showCursor
+                        className = "self-typed"
+                        cursorChar = "|">
+
+                </Typed>
 
                   <h1 style = {{marginTop:"40px"}}>
                     <span style = {{fontWeight:"bold",fontStyle: "italic"}}>discover,interact and collaborate on</span>  projects I have worked on!
                   </h1>
+
+
                 </div>
 
               </Col>
