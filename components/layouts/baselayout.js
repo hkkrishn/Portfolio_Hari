@@ -10,11 +10,16 @@ import Header from '../shared/Header'
 
 //React functional component that holds both the page information passed as props.children and the Header Component, displayed on each page.
 const BaseLayout = props=>{
+    const {className,children} = props;
     return (
-        <>
+        <div className = "layout-container">
         <Header/>
-        {props.children}
-        </>
+        <main className = {`cover ${className}`}>
+            <div className = "wrapper">
+            {children}
+            </div>
+        </main>
+        </div>
 
 
     )
