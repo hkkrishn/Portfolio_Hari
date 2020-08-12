@@ -1,6 +1,14 @@
 @import './shared/fonts';
 @import './shared/index';
 
+//Components
+@import './components/header';
+
+.absolute {
+  position: absolute;
+
+}
+
   html, body {
     height: 100%;
     width:100%;

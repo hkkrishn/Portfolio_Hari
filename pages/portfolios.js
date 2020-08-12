@@ -5,6 +5,7 @@
 
 import React,{Component} from 'react'
 import BaseLayout from '../components/layouts/baselayout'
+import BasePage from '../components/BasePage'
 import axios from 'axios'
 // import Link from 'next/link'
 import {Link} from '../routes'
@@ -44,10 +45,12 @@ class Portfolios extends Component{
       const {posts}= this.props;
     return(
       <BaseLayout>
-        <h1 className = "customClass">I am Portfolios Page</h1>
-        <ul>
-           {this.renderPosts(posts)}
-        </ul>
+        <BasePage>
+          <h1 className = "customClass">I am Portfolios Page</h1>
+          <ul>
+            {this.renderPosts(posts)}
+          </ul>
+        </BasePage>
       </BaseLayout>
     )
   }
