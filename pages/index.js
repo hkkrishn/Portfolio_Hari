@@ -9,12 +9,11 @@ import { Container, Row, Col } from 'reactstrap';
 import BasePage from '../components/BasePage'
 import Typed from 'react-typed'
 const Roles = ['Developer','Tech Lover','Bioinformatics',"React.js","Next.js","AWS","Node.js","Python","Rust","Microservices"]
-//class component that holds the base layout component as well as information of page that is passed down as props.children
-class Index extends Component{
-  render(){
+//functional component that holds the base layout component as well as information of page that is passed down as props.children
+const Index=()=>{
     return(
       <BaseLayout className="cover">
-        <BasePage>
+
           <div className="main-section">
             <div className="background-image">
               <img src="/images/background-index.png" />
@@ -65,10 +64,10 @@ class Index extends Component{
               </Row>
             </Container>
           </div>
-        </BasePage>
+
       </BaseLayout>
     )
-  }
+
 }
 
 export default Index;

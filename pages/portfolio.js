@@ -8,21 +8,11 @@ import BasePage from '../components/BasePage'
 import {withRouter} from 'next/router'
 import axios from 'axios'
 
-//react class based component
+//functional class based component
 
-class Portfolio extends Component{
-    static async getInitialProps({query}){
-        let post = []
-        try{
-          const res = await axios.get(`https://jsonplaceholder.typicode.com/posts/${query.id}`)
-          post = res.data;
-        }catch(err){
-            console.log(err)
-        }
-        return{portfolio:post};
-    }
-    render(){
-        const {portfolio} = this.props;
+const Portfolio=()=>{
+    const {portfolio} = this.props;
+
         return(
             <BaseLayout>
                 <BasePage>
@@ -34,9 +24,17 @@ class Portfolio extends Component{
                 <p>ID:{portfolio.id}</p>
             </BaseLayout>
         )
+}
 
+ Portfolio.getInitialProps=async ({query})=>{
+    let post = []
+    try{
+      const res = await axios.get(`https://jsonplaceholder.typicode.com/posts/${query.id}`)
+      post = res.data;
+    }catch(err){
+        console.log(err)
     }
-
+    return{portfolio:post};
 }
 
 export default withRouter(Portfolio);

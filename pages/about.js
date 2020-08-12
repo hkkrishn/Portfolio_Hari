@@ -7,17 +7,16 @@ import React,{Component} from 'react'
 import BaseLayout from '../components/layouts/baselayout'
 import BasePage from '../components/BasePage'
 
-//class component that holds the base layout component as well as information of page that is passed down as props.children
+//functional component that holds the base layout component as well as information of page that is passed down as props.children
 
-class About extends Component{
-  render(){
+const  About = ()=>{
     return(
-      <BasePage>
-         <h1>I am About Page</h1>
-
-      </BasePage>
+      <BaseLayout>
+        <BasePage>
+          <h1>I am About Page</h1>
+        </BasePage>
+      </BaseLayout>
     )
-  }
 }
 
 export default About;
