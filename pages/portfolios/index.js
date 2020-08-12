@@ -4,11 +4,12 @@
 //Description: This is the portfolio page within the site that will contain all links to projects and render them.
 
 import React,{Component} from 'react'
-import BaseLayout from '../components/layouts/baselayout'
-import BasePage from '../components/BasePage'
+import BaseLayout from '../../components/layouts/BaseLayout';
+import BasePage from '../../components/BasePage';
+import Link from 'next/link';
 import axios from 'axios'
-// import Link from 'next/link'
-import {Link} from '../routes'
+
+
 
 //class component that holds the base layout component as well as information of page that is passed down as props.children
 
@@ -19,7 +20,7 @@ const Portfolios=({posts})=>{
       return posts.map(post=>{
         return(
       <li style= {{fontSize:"20px"}} key = {post.id}>
-        <Link route = {`/portfolios/${post.id}`} >
+        <Link as = {`/portfolios/${post.id}`} href = "/portfolios/[id]">
             <a>
                 {post.title}
             </a>
