@@ -7,14 +7,16 @@ import React,{Component} from 'react'
 import BaseLayout from '@/components/layouts/baselayout';
 import BasePage from '@/components/BasePage';
 import Link from 'next/link';
-import axios from 'axios'
-import {useEffect} from 'react';
+import {useEffect,useState} from 'react';
 
 
 
 //class component that holds the base layout component as well as information of page that is passed down as props.children
+//posts predfined to empty array
+const Portfolios=()=>{
 
-const Portfolios=({posts})=>{
+  const [posts,setPosts] = useState([])
+
     //UseEffect  Function, empty array indicates that this function will only be called once.
     useEffect(()=>{
       //async function to get data
@@ -22,7 +24,8 @@ const Portfolios=({posts})=>{
         //fetch function to make request axios can be called as well
          const res =   await fetch('/api/v1/posts')
          const data = await res.json();
-        //  console.log(data);
+         console.log(data);
+         setPosts(data);
 
 
 
@@ -60,16 +63,6 @@ const Portfolios=({posts})=>{
 }
 
 //function to get posts from JSON Placeholder API
-Portfolios.getInitialProps=async()=>{
-  let posts = []
-  try{
-    const res = await axios.get(`https://jsonplaceholder.typicode.com/posts`)
-    posts = res.data;
-  }catch(err){
-      console.log(err)
-  }
-  return{posts:posts.slice(0,10)};
-}
 
 
 
