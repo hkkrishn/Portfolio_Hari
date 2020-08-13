@@ -18,7 +18,8 @@ const handlePosts =  async(req,res)=>{
       res.status(200).json(posts.slice(0,10))
     }catch(err){
         console.log(err)
-        res.status(error.status || 400).end('API error');
+        //catch error and send back error message
+        res.status(err.status || 400).json({message:"There is an error with the API"})
     }
 
 
