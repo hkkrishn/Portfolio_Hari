@@ -4,9 +4,9 @@
 //Description: This is the main component that holds all pages.
 
 import React,{Component} from 'react'
-import BaseLayout from '../components/layouts/baselayout'
+import BaseLayout from '@/components/layouts/baselayout'
 import { Container, Row, Col } from 'reactstrap';
-import BasePage from '../components/BasePage'
+import BasePage from '@/components/BasePage'
 import Typed from 'react-typed'
 const Roles = ['Developer','Tech Lover','Bioinformatics',"React.js","Next.js","AWS","Node.js","Python","Rust","Microservices"]
 //functional component that holds the base layout component as well as information of page that is passed down as props.children

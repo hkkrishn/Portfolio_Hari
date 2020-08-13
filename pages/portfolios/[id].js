@@ -3,8 +3,8 @@
 //Date: 08/06/2020
 //Description: This is the dynamically created page for each project in the porfolio.
 import React,{Component} from 'react'
-import BaseLayout from '../../components/layouts/baselayout'
-import BasePage from '../../components/BasePage'
+import BaseLayout from '@/components/layouts/baselayout';
+import BasePage from '@/components/BasePage';
 import {withRouter} from 'next/router'
 import axios from 'axios'
 

@@ -4,8 +4,8 @@
 //Description: This is the portfolio page within the site that will contain all links to projects and render them.
 
 import React,{Component} from 'react'
-import BaseLayout from '../../components/layouts/BaseLayout';
-import BasePage from '../../components/BasePage';
+import BaseLayout from '@/components/layouts/BaseLayout';
+import BasePage from '@/components/BasePage';
 import Link from 'next/link';
 import axios from 'axios'
 
