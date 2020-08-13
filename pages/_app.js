@@ -15,28 +15,11 @@ import React,{Component} from 'react'
 //Renders each page with its content
 
 
-class MyApp extends Component{
-
-  //function to gather information from server for all our pages,
-  // ctx parameter refers to the context object
-
-  static async getInitialProps({Component,ctx}){
-    let pageProps = {};
-
-    if(Component.getInitialProps){
-      //calls the components getInitialProps if it has one
-      pageProps = await Component.getInitialProps(ctx)
-    }
-
-    return{pageProps};
-}
-
-  render(){
-    const {Component,pageProps} = this.props;
+const MyApp=({Component,pageProps})=>{
     return(
       <Component {...pageProps} />
     )
-  }
+
 }
 
 export default MyApp
