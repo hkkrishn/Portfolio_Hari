@@ -9,7 +9,7 @@ import {
     Collapse,
     Navbar,
     NavbarToggler,
-    NavbarBrand,
+
     Nav,
     NavItem,
     NavLink,
@@ -43,6 +43,20 @@ const HelperNavbrand = (props) =>{
         </Link>
     )
 
+}
+
+//Functional component for Login button
+
+const LoginLink = ()=>{
+    return(
+        <span className = "nav-link port-navbar-link clickable">Login</span>
+    )
+}
+
+const LoginOutLink = ()=>{
+    return(
+        <span className = "nav-link port-navbar-link clickable">Log Out</span>
+    )
 }
 
 //Header React functional component that uses the Next.js Link Component to create a tags or links to all other pages
@@ -82,8 +96,13 @@ const Header = ()=>{
                         <NavItem className="port-navbar-item">
                         <HelperNavLink title = "Resume" url = "/cv" />
                         </NavItem>
+                    </Nav>
+                    <Nav navbar>
                         <NavItem className="port-navbar-item">
-                        <NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>
+                            <LoginLink/>
+                        </NavItem>
+                        <NavItem className="port-navbar-item">
+                            <LoginOutLink/>
                         </NavItem>
 
                     </Nav>
