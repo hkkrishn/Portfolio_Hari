@@ -6,8 +6,8 @@
 //all styles need to be defined within the app.js file.
 
 
-import '../styles/globals.css'
-import '../styles/main.scss'
+import '@/styles/globals.css'
+import '@/styles/main.scss'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React,{Component} from 'react'
 
