@@ -12,7 +12,8 @@ import {useGetPosts} from '@/actions'
 //functional component that holds the base layout component as well as information of page that is passed down as props.children
 
 const Portfolios=()=>{
-    const { posts,error } = useGetPosts();
+    const { posts,error,loading } = useGetPosts();
+    console.log(loading)
     //Function to render posts via li tags.
     const renderPosts=(posts)=>{
       return posts.map(post=>{
@@ -31,6 +32,9 @@ const Portfolios=()=>{
       <BaseLayout>
         <BasePage>
           <h1 className = "customClass">I am Portfolios Page</h1>
+          {loading &&
+            <p>Loading Data...</p>
+          }
           {posts&&
             <ul>
             {renderPosts(posts)}

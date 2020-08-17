@@ -9,6 +9,10 @@ import {useState,useEffect} from 'react'
  export const useGetPosts = ()=>{
     const [posts,setPosts] = useState([])
     const [error,setError] = useState()
+
+    //state for gathering loading state
+    const [loading,setLoading] = useState(true);
+
     //UseEffect  Function, empty array indicates that this function will only be called once.
     useEffect(()=>{
       //async function to get data
@@ -26,10 +30,11 @@ import {useState,useEffect} from 'react'
              //async setState function
              setPosts(result);
           }
+          setLoading(false);
          }
 
       getPosts();
     },[])
-    return{posts,error}
+    return{posts,error,loading}
 
   }
