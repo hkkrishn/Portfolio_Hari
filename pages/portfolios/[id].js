@@ -7,19 +7,36 @@ import BaseLayout from '@/components/layouts/baselayout';
 import BasePage from '@/components/BasePage';
 import {withRouter} from 'next/router'
 import axios from 'axios'
+import {useGetPostsById} from '@/actions'
+import {useRouter} from 'next/router'
 
 //functional class based component
 
-const Portfolio=({portfolio})=>{
+const Portfolio=()=>{
+    const router = useRouter();
+    //on initial render when page is statically optimized and served query is undefined
+    const {data:portfolio,error,loading} =
+    //useSWR handles the situation where router.query.id is undefined upon initially rendered
+    useGetPostsById(router.query.id);
 
 
         return(
             <BaseLayout>
                 <BasePage>
+                {loading && <p>Loading Data... </p>}
+                {error && <div className = "alert alert-danger">
+                {error.message}
+
+                </div>}
+                {portfolio &&
+                <>
                 <h1>I am a project</h1>
                 <h1>{portfolio.title}</h1>
                 <p>BODY:{portfolio.body}</p>
                 <p>ID:{portfolio.id}</p>
+                </>
+                }
+
 
                 </BasePage>
 
@@ -27,15 +44,6 @@ const Portfolio=({portfolio})=>{
         )
 }
 
- Portfolio.getInitialProps=async ({query})=>{
-    let post = []
-    try{
-      const res = await axios.get(`https://jsonplaceholder.typicode.com/posts/${query.id}`)
-      post = res.data;
-    }catch(err){
-        console.log(err)
-    }
-    return{portfolio:post};
-}
+
 
 export default withRouter(Portfolio);

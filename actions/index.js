@@ -3,33 +3,32 @@
 //Date: 08/06/2020
 //Description: Modular functions for separation of concerns
 
-import {useState,useEffect} from 'react'
+import useSWR from 'swr'
 
-//dynamic function to make all API calls
- export const useGetPosts = ()=>{
-    const [posts,setPosts] = useState([])
-    const [error,setError] = useState()
-    //UseEffect  Function, empty array indicates that this function will only be called once.
-    useEffect(()=>{
-      //async function to get data
-      const getPosts = async ()=>{
-        //fetch function to make request axios can be called as well
-         const res =   await fetch('/api/v1/posts')
-         const result = await res.json();
 
-         //error handling
-         if(res.status !== 200){
-             setError(result)
-         }else{
-             //no error is present
-             console.log(result);
-             //async setState function
-             setPosts(result);
-          }
-         }
+ //function to fetch data for SWR,this will result data from cache intiially then the endpoint
+ const fetcher = (url)=>
+  fetch(url)
+  .then( async res=>{
+    const result = await res.json()
+    if(res.status !== 200 ){
+      return Promise.reject(result);
+    }else{
+      return result
+    }
+   });
+//function to gather data from API endpoint all functions need to have hook prefix
+export const useGetPosts = () => {
+  //rest indicates all other information
+  const {data, error, ...rest} = useSWR('/api/v1/posts', fetcher);
+  //if we have no data and there is no error then we are loading
+  return {data, error, loading: !data && !error, ...rest}
+}
 
-      getPosts();
-    },[])
-    return{posts,error}
-
-  }
+//function to gather posts dynamically by ID
+export const useGetPostsById = (id) => {
+  //rest indicates all other information
+  const {data, error, ...rest} = useSWR(id ? (`/api/v1/posts/${id}`):(null), fetcher);
+  //if we have no data and there is no error then we are loading
+  return {data, error, loading: !data && !error, ...rest}
+}
