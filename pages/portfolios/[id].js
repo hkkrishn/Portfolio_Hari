@@ -7,7 +7,7 @@ import BaseLayout from '@/components/layouts/baselayout';
 import BasePage from '@/components/BasePage';
 import {withRouter} from 'next/router'
 import axios from 'axios'
-import {useGetData} from '@/actions'
+import {useGetPosts} from '@/actions'
 import {useRouter} from 'next/router'
 
 //functional class based component

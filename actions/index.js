@@ -3,39 +3,28 @@
 //Date: 08/06/2020
 //Description: Modular functions for separation of concerns
 
-import {useState,useEffect} from 'react'
+import useSWR from 'swr'
 
-//dynamic function to make all API calls
- export const useGetData = (url)=>{
-    const [data,setData] = useState()
-    const [error,setError] = useState()
 
-    //state for gathering loading state
-    const [loading,setLoading] = useState(true);
+ //function to fetch data for SWR,this will result data from cache intiially then the endpoint
+ const fetcher = (url)=>
+  fetch(url)
+  .then( async res=>{
+    const result = await res.json()
+    if(res.status !== 200 ){
+      return Promise.reject(result);
+    }else{
+      return result
+    }
+   });
 
-    //UseEffect  Function,  array on line 38 indicates that every time the url changes we run the function again .
-    useEffect(()=>{
-      //async function to get data
-      //url is the API endpoint passed
-      const getData = async ()=>{
-        //fetch function to make request axios can be called as well
-         const res =   await fetch(url)
-         const result = await res.json();
 
-         //error handling
-         if(res.status !== 200){
-             setError(result)
-         }else{
-             //no error is present
-             console.log(result);
-             //async setState function
-             setData(result);
-          }
-          setLoading(false);
-         }
-         //if url is present fetch data
-       url && getData();
-    },[url])
-    return{data,error,loading}
 
-  }
+//function to gather data from API endpoint all functions need to have hook prefix
+export const useGetPosts = () => {
+  //rest indicates all other information
+  const {data, error, ...rest} = useSWR('/api/v1/posts', fetcher);
+  //if we have no data and there is no error then we are loading
+  return {data, error, loading: !data && !error, ...rest}
+}
+

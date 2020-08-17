@@ -7,12 +7,15 @@ import React from 'react'
 import BaseLayout from '@/components/layouts/baselayout';
 import BasePage from '@/components/BasePage';
 import Link from 'next/link';
-import {useGetData} from '@/actions'
+import {useGetPosts} from '@/actions';
+
 
 //functional component that holds the base layout component as well as information of page that is passed down as props.children
-
+//SWR is added to gather data from cache before executing request for data that is validated to have changed
 const Portfolios=()=>{
-    const {data,error,loading } = useGetData('/api/v1/posts');
+
+
+    const {data,error,loading } = useGetPosts();
     console.log(loading)
     //Function to render posts via li tags.
     const renderPosts=(posts)=>{
