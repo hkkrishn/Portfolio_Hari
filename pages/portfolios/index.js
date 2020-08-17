@@ -7,12 +7,12 @@ import React from 'react'
 import BaseLayout from '@/components/layouts/baselayout';
 import BasePage from '@/components/BasePage';
 import Link from 'next/link';
-import {useGetPosts} from '@/actions'
+import {useGetData} from '@/actions'
 
 //functional component that holds the base layout component as well as information of page that is passed down as props.children
 
 const Portfolios=()=>{
-    const { posts,error,loading } = useGetPosts();
+    const {data,error,loading } = useGetData('/api/v1/posts');
     console.log(loading)
     //Function to render posts via li tags.
     const renderPosts=(posts)=>{
@@ -35,9 +35,9 @@ const Portfolios=()=>{
           {loading &&
             <p>Loading Data...</p>
           }
-          {posts&&
+          {data &&
             <ul>
-            {renderPosts(posts)}
+            {renderPosts(data)}
           </ul>
           }
           {error &&

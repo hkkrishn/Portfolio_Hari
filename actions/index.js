@@ -6,19 +6,20 @@
 import {useState,useEffect} from 'react'
 
 //dynamic function to make all API calls
- export const useGetPosts = ()=>{
-    const [posts,setPosts] = useState([])
+ export const useGetData = (url)=>{
+    const [data,setData] = useState()
     const [error,setError] = useState()
 
     //state for gathering loading state
     const [loading,setLoading] = useState(true);
 
-    //UseEffect  Function, empty array indicates that this function will only be called once.
+    //UseEffect  Function,  array on line 38 indicates that every time the url changes we run the function again .
     useEffect(()=>{
       //async function to get data
-      const getPosts = async ()=>{
+      //url is the API endpoint passed
+      const getData = async ()=>{
         //fetch function to make request axios can be called as well
-         const res =   await fetch('/api/v1/posts')
+         const res =   await fetch(url)
          const result = await res.json();
 
          //error handling
@@ -28,13 +29,13 @@ import {useState,useEffect} from 'react'
              //no error is present
              console.log(result);
              //async setState function
-             setPosts(result);
+             setData(result);
           }
           setLoading(false);
          }
-
-      getPosts();
-    },[])
-    return{posts,error,loading}
+         //if url is present fetch data
+       url && getData();
+    },[url])
+    return{data,error,loading}
 
   }
