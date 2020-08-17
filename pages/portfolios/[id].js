@@ -7,7 +7,7 @@ import BaseLayout from '@/components/layouts/baselayout';
 import BasePage from '@/components/BasePage';
 import {withRouter} from 'next/router'
 import axios from 'axios'
-import {useGetPosts} from '@/actions'
+import {useGetPostsById} from '@/actions'
 import {useRouter} from 'next/router'
 
 //functional class based component
@@ -16,7 +16,8 @@ const Portfolio=()=>{
     const router = useRouter();
     //on initial render when page is statically optimized and served query is undefined
     const {data:portfolio,error,loading} =
-    useGetData(router.query.id ? (`/api/v1/posts/${router.query.id}`):(null));
+    //useSWR handles the situation where router.query.id is undefined upon initially rendered
+    useGetPostsById(router.query.id);
 
 
         return(
