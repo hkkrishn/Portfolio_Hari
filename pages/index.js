@@ -14,9 +14,12 @@ const Roles = ['Developer','Tech Lover','Bioinformatics',"React.js","Next.js","A
 //functional component that holds the base layout component as well as information of page that is passed down as props.children
 const Index=()=>{
 
-  const {data,error,loading} = useGetUser();
+  const {data,loading} = useGetUser();
     return(
-      <BaseLayout className="cover">
+      <BaseLayout
+      user = {data}
+      loading = {loading}
+      className="cover">
 
           <div className="main-section">
             <div className="background-image">

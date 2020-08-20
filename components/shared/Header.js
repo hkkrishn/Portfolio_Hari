@@ -62,7 +62,7 @@ const LoginOutLink = ()=>{
 
 //Header React functional component that uses the Next.js Link Component to create a tags or links to all other pages
 
-const Header = ()=>{
+const Header = ({user,loading})=>{
     //to add your name to header change this variable.
     const NameofPortfolio = "Harikrishnan"
 
@@ -99,12 +99,22 @@ const Header = ()=>{
                         </NavItem>
                     </Nav>
                     <Nav navbar>
-                        <NavItem className="port-navbar-item">
-                            <LoginLink/>
-                        </NavItem>
+                    {!loading &&
+                    <>
+                    { user &&
                         <NavItem className="port-navbar-item">
                             <LoginOutLink/>
                         </NavItem>
+
+                    }
+                    {!user &&
+                        <NavItem className="port-navbar-item">
+                            <LoginLink/>
+                        </NavItem>
+                    }
+
+                    </>
+                    }
 
                     </Nav>
 

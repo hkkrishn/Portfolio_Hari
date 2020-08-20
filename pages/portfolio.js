@@ -7,6 +7,7 @@ import BaseLayout from '@/components/layouts/baselayout'
 import BasePage from '@/components/BasePage'
 import {withRouter} from 'next/router'
 import axios from 'axios'
+import {useGetUser} from '@/actions/user';
 
 //functional class based component
 
@@ -14,7 +15,9 @@ const Portfolio=()=>{
     const {portfolio} = props;
 
         return(
-            <BaseLayout>
+            <BaseLayout
+            user = {data}
+            loading = {loading}>
                 <BasePage>
 
                 </BasePage>

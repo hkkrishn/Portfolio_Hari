@@ -8,14 +8,15 @@ import BaseLayout from '@/components/layouts/baselayout';
 import BasePage from '@/components/BasePage';
 import Link from 'next/link';
 import {useGetPosts} from '@/actions';
+import {useGetUser} from '@/actions/user';
 
 
 //functional component that holds the base layout component as well as information of page that is passed down as props.children
 //SWR is added to gather data from cache before executing request for data that is validated to have changed
 const Portfolios=()=>{
 
-
-    const {data,error,loading } = useGetPosts();
+    const {data:dataUser,loading:loadingUser}  = useGetUser();
+    const {data,loading,error} = useGetPosts();
     console.log(loading)
     //Function to render posts via li tags.
     const renderPosts=(posts)=>{
@@ -32,7 +33,9 @@ const Portfolios=()=>{
     })
     }
     return(
-      <BaseLayout>
+      <BaseLayout
+      user = {dataUser}
+      loading = {loadingUser}>
         <BasePage>
           <h1 className = "customClass">I am Portfolios Page</h1>
           {loading &&

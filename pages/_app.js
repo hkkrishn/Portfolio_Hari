@@ -10,6 +10,7 @@ import '@/styles/globals.css'
 import '@/styles/main.scss'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React,{Component} from 'react'
+import {useGetUser} from '@/actions/user';
 
 
 //Renders each page with its content
