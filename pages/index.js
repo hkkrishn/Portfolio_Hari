@@ -8,9 +8,13 @@ import BaseLayout from '@/components/layouts/baselayout'
 import { Container, Row, Col } from 'reactstrap';
 import BasePage from '@/components/BasePage'
 import Typed from 'react-typed'
+import {useGetUser} from '@/actions/user';
+
 const Roles = ['Developer','Tech Lover','Bioinformatics',"React.js","Next.js","AWS","Node.js","Python","Rust","Microservices"]
 //functional component that holds the base layout component as well as information of page that is passed down as props.children
 const Index=()=>{
+
+  const {data,error,loading} = useGetUser();
     return(
       <BaseLayout className="cover">
 

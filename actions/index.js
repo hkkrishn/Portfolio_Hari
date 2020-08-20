@@ -7,7 +7,7 @@ import useSWR from 'swr'
 
 
  //function to fetch data for SWR,this will result data from cache intiially then the endpoint
- const fetcher = (url)=>
+  export const fetcher = (url)=>
   fetch(url)
   .then( async res=>{
     const result = await res.json()
