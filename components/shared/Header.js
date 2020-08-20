@@ -50,7 +50,7 @@ const HelperNavbrand = (props) =>{
 
 const LoginLink = ()=>{
     return(
-        <HelperNavLink   url ="/api/v1/login"  title ="Login"/>
+        <a className = "nav-link port-navbar-link" href = "/api/v1/login">Login</a>
     )
 }
 
