@@ -7,15 +7,17 @@ import { initAuth0 } from '@auth0/nextjs-auth0';
 
 //values gathered from Auth0.com
 //values passed as enviornment variables
+  // Using the variables below in the browser will return `undefined`. Next.js doesn't
+  // expose environment variables unless they start with `NEXT_PUBLIC_`
 export default initAuth0({
-  domain: process.env.AUTH0_DOMAIN,
-  clientId: process.env.AUTH0_CLIENT_ID,
-  clientSecret: process.env.AUTH0_CLIENT_SECRET,
+  domain: process.env.NEXT_PUBLIC_DEVELOPMENT_AUTH0_DOMAIN,
+  clientId: process.env.NEXT_PUBLIC_DEVELOPMENT_AUTH0_CLIENTID,
+  clientSecret: process.env.NEXT_PUBLIC_DEVELOPMENT_AUTH0_CLIENTSECRET,
   scope: 'openid profile',
-  redirectUri: process.env.AUTH0_REDIRECT_URI,
-  postLogoutRedirectUri: process.env.AUTH0_POST_LOGOUT_REDIRECT_URI,
+  redirectUri: process.env.NEXT_PUBLIC_DEVELOPMENT_AUTH0_REDIRECTURI,
+  postLogoutRedirectUri: process.env.NEXT_PUBLIC_DEVELOPMENT_AUTH0_POSTLOGOUTREDIRECTURI,
   session: {
     // The secret used to encrypt the cookie.
-    cookieSecret: process.env.AUTH0_COOKIE_SECRET,
+    cookieSecret: process.env.NEXT_PUBLIC_DEVELOPMENT_AUTH0_COOKIESECRET,
   }
 });

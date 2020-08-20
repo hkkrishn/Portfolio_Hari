@@ -3,8 +3,20 @@
 //Date: 08/06/2020
 //Description:Serverless function to integrate with Auth0 and handle authentication
 
-const login = (req,res)=>{
-    res.status(200).json({message:" Login API connection success"})
+
+import auth0 from '@/utils/auth0';
+
+//async function to issue get request to auth0.com/ endpoint
+const login = async (req,res)=>{
+    try{
+        //handleLogin is a method from the auth0 package
+        await auth0.handleLogin(req,res);
+
+    }catch(eror){
+        console.log(error)
+        res.status(error.status||400).end(error.message)
+    }
+
 }
 
 export default login;
