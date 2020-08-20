@@ -33,6 +33,7 @@ const HelperNavLink = (props)=>{
       )
 }
 
+
 //Helper component to prevent validateDOMNesting error
 
 const HelperNavbrand = (props) =>{
@@ -49,7 +50,7 @@ const HelperNavbrand = (props) =>{
 
 const LoginLink = ()=>{
     return(
-        <span className = "nav-link port-navbar-link clickable">Login</span>
+        <a className = "nav-link port-navbar-link" href = "/api/v1/login">Login</a>
     )
 }
 
