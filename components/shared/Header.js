@@ -56,7 +56,7 @@ const LoginLink = ()=>{
 
 const LoginOutLink = ()=>{
     return(
-        <span className = "nav-link port-navbar-link clickable">Log Out</span>
+        <a className = "nav-link port-navbar-link" href = "/api/v1/logout">Log Out</a>
     )
 }
 
