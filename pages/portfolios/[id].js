@@ -9,6 +9,7 @@ import {withRouter} from 'next/router'
 import axios from 'axios'
 import {useGetPostsById} from '@/actions'
 import {useRouter} from 'next/router'
+import {useGetUser} from '@/actions/user';
 
 //functional class based component
 
@@ -18,10 +19,12 @@ const Portfolio=()=>{
     const {data:portfolio,error,loading} =
     //useSWR handles the situation where router.query.id is undefined upon initially rendered
     useGetPostsById(router.query.id);
-
+    const {data:dataUser,loading:loadingUser}  = useGetUser();
 
         return(
-            <BaseLayout>
+            <BaseLayout
+            user = {dataUser}
+      loading = {loadingUser}>
                 <BasePage>
                 {loading && <p>Loading Data... </p>}
                 {error && <div className = "alert alert-danger">

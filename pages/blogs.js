@@ -7,12 +7,16 @@
 import React,{Component} from 'react'
 import BaseLayout from '@/components/layouts/baselayout'
 import BasePage from '@/components/BasePage'
+import {useGetUser} from '@/actions/user';
 
 //functional component that holds the base layout component as well as information of page that is passed down as props.children
 
 const Blogs = ()=>{
+  const {data,loading} = useGetUser();
     return(
-      <BaseLayout>
+      <BaseLayout
+      user = {data}
+      loading = {loading}>
         <BasePage>
           <h1>I am Blogs Page</h1>
         </BasePage>

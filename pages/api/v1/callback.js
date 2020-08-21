@@ -13,9 +13,9 @@ const callback = async (req,res)=>{
         //handleCallback is a method from the auth0 package
         await auth0.handleCallback(req,res,{redirecTo:'/'});
 
-    }catch(eror){
-        console.log(error)
-        res.status(error.status||400).end(error.message)
+    }catch(err){
+        console.log(err)
+        res.status(err.status||400).end(err.message)
     }
 
 }
