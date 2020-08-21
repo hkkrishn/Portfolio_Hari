@@ -1,7 +1,7 @@
 //Author:Harikrishnan Kuppusamykrishnan
 //Project: Portfolio Website
 //Date: 08/06/2020
-//Description:  Server Side Rendered Secret page where only authenticated users have access to this page
+//Description:  Server Side Rendered Admin Page
 
 import React,{Component} from 'react';
 import BaseLayout from '@/components/layouts/baselayout';
@@ -14,7 +14,7 @@ import auth0,{authorizeUser,withAuth} from '@/utils/auth0'
 
 //functional component that holds the base layout component as well as information of page that is passed down as props.children
 
-const  SecretSSR = ({user,title})=>{
+const  OnlyAdminSSR = ({user,title})=>{
     const {data,loading} = useGetUser();
     return(
         <BaseLayout
@@ -27,15 +27,6 @@ const  SecretSSR = ({user,title})=>{
         </BaseLayout>
     )
 }
-
-
-
-//Executed only on the server
-  //must be called getServerSideProps
-  //function receives the context object
-  //This functionality is not part of the browser
-
-
 
 //simulator function to async fetchd data
 const getTitle = ()=>{
@@ -52,5 +43,5 @@ const getTitle = ()=>{
 export const getServerSideProps = withAuth( async ()=>{
   const title =  await getTitle()
   return title;
-})();
-export default SecretSSR;
+})('admin');
+export default OnlyAdminSSR;

@@ -24,6 +24,12 @@ const auth0 =  initAuth0({
 
 export default auth0;
 
+//function to check for admin role
+export const isAuthorized = (user,role) =>{
+  return (user && user[process.env.NEXT_PUBLIC_DEVELOPMENT_AUTH0_NAMESPACE + '/roles'].includes(role))
+
+}
+
 
 //modular function for server side authentication and redirect
  export const authorizeUser =  async (req,res)=>{
@@ -46,13 +52,13 @@ export default auth0;
 }
 
 // root function to return server side props to our page
-export const withAuth = (getData)=>{
+export const withAuth = (getData)=>(role)=>{
   return  async ({req,res})=>{
     //retrieve userSession on server from auth0
   const session = await auth0.getSession(req);
 
   //check to see if the user is authenticated
-  if(!session || !session.user){
+  if(!session || !session.user|| role && !isAuthorized(session.user,role)){
   //server side redirect to the login page
     res.writeHead(302,{
       Location:'/api/v1/login'

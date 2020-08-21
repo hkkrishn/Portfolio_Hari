@@ -4,9 +4,10 @@
 //Description: Modular Higher Order Component that displays the passed component if Authenticated
 import {useGetUser} from '@/actions/user';
 import Redirect from '@/components/shared/Redirect'
+import {isAuthorized} from '@/utils/auth0'
 
 //Higher Order Component which checks to see if the user is authenticated and only displays the page if so
- export const withAuth = (Component)=>{
+ export const withAuth = (Component)=>(role)=>{
     return (props)=>{
         const {data,loading} = useGetUser();
         //auth check
@@ -19,6 +20,9 @@ import Redirect from '@/components/shared/Redirect'
             return <Redirect ssr to = "/api/v1/login" />
 
           }else{
+              if( role && !isAuthorized(data,role)){
+                return <Redirect ssr to = "/api/v1/login" />
+              }
             return(
                 <Component data = {data} loading = {loading} {...props}/>
               )

@@ -15,5 +15,8 @@ module.exports = {
     config.plugins.push(new Dotenv({silent:true}));
     //silent key set to true set to true suppresses warnings
     return config;
+  },
+  env:{
+    NEXT_PUBLIC_DEVELOPMENT_AUTH0_NAMESPACE:process.env.NEXT_PUBLIC_DEVELOPMENT_AUTH0_NAMESPACE
   }
 }
