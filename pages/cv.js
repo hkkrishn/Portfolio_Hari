@@ -7,11 +7,12 @@ import React,{Component} from 'react'
 import BaseLayout from '@/components/layouts/baselayout'
 import BasePage from '@/components/BasePage';
 import {useGetUser} from '@/actions/user';
+import {withAuth} from '@/HOC/withAuth'
 
 //functional component that holds the base layout component as well as information of page that is passed down as props.children
 
-const CV = ()=>{
-  const {data,loading} = useGetUser();
+const CV = ({data,loading})=>{
+
     return(
       <BaseLayout
       user = {data}
@@ -24,4 +25,4 @@ const CV = ()=>{
 
 }
 
-export default CV;
+export default withAuth(CV);
