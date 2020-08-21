@@ -16,7 +16,7 @@ import Redirect from '@/components/shared/Redirect'
             )
         } if(!data){
             //redirect user if not authenticated via Redirect component
-            return <Redirect to = "/api/v1/login" />
+            return <Redirect ssr to = "/api/v1/login" />
 
           }else{
             return(

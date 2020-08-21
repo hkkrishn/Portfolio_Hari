@@ -100,6 +100,9 @@ const Header = ({user,loading})=>{
                         <NavItem className="port-navbar-item">
                         <HelperNavLink title = "Secret" url = "/secret" />
                         </NavItem>
+                        <NavItem className="port-navbar-item">
+                        <HelperNavLink title = "SecretSSR" url = "/secretssr" />
+                        </NavItem>
 
                     </Nav>
                     <Nav navbar>
