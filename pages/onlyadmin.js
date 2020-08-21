@@ -1,7 +1,7 @@
 //Author:Harikrishnan Kuppusamykrishnan
 //Project: Portfolio Website
 //Date: 08/06/2020
-//Description: Secret page where only authenticated users have access to this page
+//Description: Page only viewable to users with admin role associated
 
 import React,{Component} from 'react';
 import BaseLayout from '@/components/layouts/baselayout';
@@ -11,13 +11,13 @@ import Redirect from '@/components/shared/Redirect'
 import {withAuth} from '@/HOC/withAuth'
 //functional component that holds the base layout component as well as information of page that is passed down as props.children
 
-const  Secret = ({data,loading})=>{
+const  OnlyAdmin = ({data,loading})=>{
     return(
         <BaseLayout
         user = {data}
         loading = {loading}>
           <BasePage>
-            <h1>I am Secret Page - {data.name}</h1>
+            <h1>I am Admin Page - {data.name}</h1>
           </BasePage>
         </BaseLayout>
       )
@@ -28,4 +28,4 @@ const  Secret = ({data,loading})=>{
 
 
 
-export default withAuth(Secret)();
+export default withAuth(OnlyAdmin)('admin');

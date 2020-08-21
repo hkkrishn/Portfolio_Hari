@@ -97,12 +97,18 @@ const Header = ({user,loading})=>{
                         <NavItem className="port-navbar-item">
                         <HelperNavLink title = "Resume" url = "/cv" />
                         </NavItem>
-                        <NavItem className="port-navbar-item">
+                        {/* <NavItem className="port-navbar-item">
                         <HelperNavLink title = "Secret" url = "/secret" />
                         </NavItem>
                         <NavItem className="port-navbar-item">
                         <HelperNavLink title = "SecretSSR" url = "/secretssr" />
                         </NavItem>
+                        <NavItem className="port-navbar-item">
+                        <HelperNavLink title = "Admin" url = "/onlyadmin" />
+                        </NavItem>
+                        <NavItem className="port-navbar-item">
+                        <HelperNavLink title = "AdminSSR" url = "/onlyadminssr" />
+                        </NavItem> */}
 
                     </Nav>
                     <Nav navbar>

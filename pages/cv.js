@@ -25,4 +25,4 @@ const CV = ({data,loading})=>{
 
 }
 
-export default withAuth(CV);
+export default withAuth(CV)();
