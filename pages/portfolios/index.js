@@ -7,25 +7,25 @@ import React from 'react'
 import BaseLayout from '@/components/layouts/baselayout';
 import BasePage from '@/components/BasePage';
 import Link from 'next/link';
-import {useGetPosts} from '@/actions';
+import PortfolioApi from '@/lib/api/portfolios'
 import {useGetUser} from '@/actions/user';
 
 
 //functional component that holds the base layout component as well as information of page that is passed down as props.children
 //SWR is added to gather data from cache before executing request for data that is validated to have changed
-const Portfolios=()=>{
+const Portfolios=({portfolios})=>{
 
     const {data:dataUser,loading:loadingUser}  = useGetUser();
-    const {data,loading,error} = useGetPosts();
-    console.log(loading)
+
+
     //Function to render posts via li tags.
-    const renderPosts=(posts)=>{
-      return posts.map(post=>{
+    const renderPortfolios=(portfolios)=>{
+      return portfolios.map(portfolio=>{
         return(
-      <li style= {{fontSize:"20px"}} key = {post.id}>
-        <Link as = {`/portfolios/${post.id}`} href = "/portfolios/[id]">
+      <li style= {{fontSize:"20px"}} key = {portfolio._id}>
+        <Link as = {`/portfolios/${portfolio._id}`} href = "/portfolios/[id]">
             <a>
-                {post.title}
+                {portfolio.title}
             </a>
         </Link>
       </li>
@@ -37,25 +37,27 @@ const Portfolios=()=>{
       user = {dataUser}
       loading = {loadingUser}>
         <BasePage>
-          <h1 className = "customClass">I am Portfolios Page</h1>
-          {loading &&
-            <p>Loading Data...</p>
-          }
-          {data &&
             <ul>
-            {renderPosts(data)}
+            {renderPortfolios(portfolios)}
           </ul>
-          }
-          {error &&
-          <div className = "aler alert-danger">{error.message}</div>
-          }
+
 
         </BasePage>
       </BaseLayout>
     )
 }
-//function to get posts from JSON Placeholder API
 
+//function to gather static data for performance, function is called only during the build time
+//create static page with dynamic data
+export const getStaticProps =  async ()=>{
+  const json = await  new PortfolioApi().getAll();
+  //resolve into json
+  const portfolios = json.data;
+  return{
+    props:{portfolios}
+  }
+
+}
 
 
 export default Portfolios;
