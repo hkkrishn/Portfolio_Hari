@@ -6,7 +6,13 @@
     z-index: 15;
     padding: 40px;
 
+
+
     .port-navbar {
+      &.with-bg {
+        background-color: #2C3E50;
+        padding: 30px;
+      }
       &-brand {
         color: white;
         font-size: 24px;

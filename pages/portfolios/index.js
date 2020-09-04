@@ -9,6 +9,9 @@ import BasePage from '@/components/BasePage';
 import Link from 'next/link';
 import PortfolioApi from '@/lib/api/portfolios'
 import {useGetUser} from '@/actions/user';
+import { Row, Col, Card, CardHeader, CardBody, CardText, CardTitle } from 'reactstrap';
+import PortfolioCard from '@/components/PortfolioCard'
+
 
 
 //functional component that holds the base layout component as well as information of page that is passed down as props.children
@@ -36,12 +39,17 @@ const Portfolios=({portfolios})=>{
       <BaseLayout
       user = {dataUser}
       loading = {loadingUser}>
-        <BasePage>
-            <ul>
-            {renderPortfolios(portfolios)}
-          </ul>
+        <BasePage
+        header = "Projects"
+         className = "portfolio-page">
+          <Row>
+          { portfolios.map((portfolio)=>
+            <Col key = {portfolio._id} md="4">
+            <PortfolioCard portfolio = {portfolio}/>
+            </Col>)
 
-
+          }
+          </Row>
         </BasePage>
       </BaseLayout>
     )
