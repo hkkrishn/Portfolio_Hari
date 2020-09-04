@@ -10,6 +10,7 @@ import BasePage from '@/components/BasePage'
 import Typed from 'react-typed'
 import {useGetUser} from '@/actions/user';
 
+
 const Roles = ['Developer','Tech Lover','Bioinformatics',"React.js","Next.js","AWS","Node.js","Python","Rust","Microservices"]
 //functional component that holds the base layout component as well as information of page that is passed down as props.children
 const Index=()=>{
@@ -67,6 +68,8 @@ const Index=()=>{
                     <h1 style = {{marginTop:"40px"}}>
                       <span style = {{fontWeight:"bold",fontStyle: "italic"}}>discover,interact and collaborate on</span>  projects I have worked on!
                     </h1>
+                    <img style = {{height:"215px",marginLeft:"100px"}} src="https://i.ibb.co/34jPwwc/Full-Color-Transparent-Bg-1280x1024-72dpi.png" alt="React Logo" />
+
                   </div>
                 </Col>
               </Row>
