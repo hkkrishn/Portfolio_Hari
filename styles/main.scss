@@ -16,16 +16,18 @@
   }
   .base-page{
     padding-top: 150px ;
-    color:black;
-    background-color: #ecedee;
+    color:white;
+    // background-color: #ecedee;
     min-height: 100vh;
 
+
+    .page-header-title {
+      font-weight: bold;
+      display: inline-block;
+      margin-bottom: 20px;
+    }
   }
-  .page-header-title {
-    font-weight: bold;
-    display: inline-block;
-    margin-bottom: 20px;
-  }
+
   .self-typed{
     font-size: 31px;
     color:white;

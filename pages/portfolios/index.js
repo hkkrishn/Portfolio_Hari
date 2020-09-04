@@ -39,7 +39,9 @@ const Portfolios=({portfolios})=>{
       <BaseLayout
       user = {dataUser}
       loading = {loadingUser}>
-        <BasePage className = "portfolio-page">
+        <BasePage
+        header = "Projects"
+         className = "portfolio-page">
           <Row>
           { portfolios.map((portfolio)=>
             <Col key = {portfolio._id} md="4">

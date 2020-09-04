@@ -17,6 +17,7 @@ const Index=()=>{
   const {data,loading} = useGetUser();
     return(
       <BaseLayout
+
       user = {data}
       loading = {loading}
       className="cover">
