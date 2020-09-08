@@ -9,6 +9,7 @@ import BasePage from '@/components/BasePage';
 import Link from 'next/link';
 import PortfolioApi from '@/lib/api/portfolios'
 import {useGetUser} from '@/actions/user';
+import {useRouter} from 'next/router'
 import { Row, Col, Card, CardHeader, CardBody, CardText, CardTitle } from 'reactstrap';
 import PortfolioCard from '@/components/PortfolioCard'
 
@@ -17,7 +18,7 @@ import PortfolioCard from '@/components/PortfolioCard'
 //functional component that holds the base layout component as well as information of page that is passed down as props.children
 //SWR is added to gather data from cache before executing request for data that is validated to have changed
 const Portfolios=({portfolios})=>{
-
+    const router = useRouter();
     const {data:dataUser,loading:loadingUser}  = useGetUser();
 
 
@@ -42,14 +43,19 @@ const Portfolios=({portfolios})=>{
         <BasePage
         header = "Projects"
          className = "portfolio-page">
-          <Row>
-          { portfolios.map((portfolio)=>
-            <Col key = {portfolio._id} md="4">
-            <PortfolioCard portfolio = {portfolio}/>
-            </Col>)
-
+           <Row>
+          { portfolios.map(portfolio =>
+            <Col
+              key={portfolio._id}
+              onClick={() => {
+                router.push('/portfolios/[id]', `/portfolios/${portfolio._id}`)
+              }}
+              md="4">
+              <PortfolioCard portfolio={portfolio} />
+            </Col>
+            )
           }
-          </Row>
+        </Row>
         </BasePage>
       </BaseLayout>
     )

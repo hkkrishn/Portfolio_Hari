@@ -64,7 +64,8 @@ const LoginOutLink = ()=>{
 
 const Header = ({user,loading,className})=>{
     //to add your name to header change this variable.
-    const NameofPortfolio = "Harikrishnan"
+    const NameofPortfolio =  "Harikrishnan"
+
 
     const [isOpen,setIsOpen] = useState(false);
 

@@ -6,38 +6,30 @@ import React,{Component} from 'react'
 import BaseLayout from '@/components/layouts/baselayout';
 import BasePage from '@/components/BasePage';
 import {withRouter} from 'next/router'
+import PortfolioApi from '@/lib/api/portfolios';
 import axios from 'axios'
-import {useGetPostsById} from '@/actions'
+
 import {useRouter} from 'next/router'
 import {useGetUser} from '@/actions/user';
+import { json } from 'express';
 
 //functional class based component
 
-const Portfolio=()=>{
+const Portfolio=({portfolio})=>{
     const router = useRouter();
     //on initial render when page is statically optimized and served query is undefined
-    const {data:portfolio,error,loading} =
-    //useSWR handles the situation where router.query.id is undefined upon initially rendered
-    useGetPostsById(router.query.id);
+
+    //We have two options either we can fetch the data client side, this way we can get statically optimized page
+    //or we can server side render the data
     const {data:dataUser,loading:loadingUser}  = useGetUser();
 
         return(
             <BaseLayout
             user = {dataUser}
       loading = {loadingUser}>
-                <BasePage>
-                {loading && <p>Loading Data... </p>}
-                {error && <div className = "alert alert-danger">
-                {error.message}
-
-                </div>}
-                {portfolio &&
-                <>
-                <h1>I am a project</h1>
-                <h1>{portfolio.title}</h1>
-                <p>BODY:{portfolio.body}</p>
-                <p>ID:{portfolio.id}</p>
-                </>
+                <BasePage header = "Project Detail">
+                {
+                    JSON.stringify(portfolio)
                 }
 
 
@@ -48,5 +40,10 @@ const Portfolio=()=>{
 }
 
 
+export async function getServerSideProps({query}) {
+    const json = await new PortfolioApi().getById(query.id);
+    const portfolio = json.data;
 
-export default withRouter(Portfolio);
+    return {props: { portfolio }};
+  }
+export default Portfolio;
