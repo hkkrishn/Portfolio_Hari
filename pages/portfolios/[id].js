@@ -5,17 +5,13 @@
 import React,{Component} from 'react'
 import BaseLayout from '@/components/layouts/baselayout';
 import BasePage from '@/components/BasePage';
-import {withRouter} from 'next/router'
-
-import axios from 'axios'
-
-import {useRouter} from 'next/router'
+import PortfolioAPI from '@/lib/api/portfolios'
 import {useGetUser} from '@/actions/user';
 
 //functional class based component
 
-const Portfolio=()=>{
-
+const Portfolio=({portfolio})=>{
+    console.log(portfolio)
     //on initial render when page is statically optimized and served query is undefined
 
     //We have two options either we can fetch the data client side, this way we can get statically optimized page
@@ -27,7 +23,7 @@ const Portfolio=()=>{
             user = {dataUser}
       loading = {loadingUser}>
                 <BasePage header = "Project Detail">
-
+            {JSON.stringify(portfolio)}
 
 
                 </BasePage>
@@ -36,5 +32,11 @@ const Portfolio=()=>{
         )
 }
 
+export const getServerSideProps = async({query})=>{
+ const json = await new PortfolioAPI().getById(query.id)
+ console.log(json)
+ const portfolio = json.data;
+ return{props:{portfolio}}
+}
 
 export default Portfolio;
