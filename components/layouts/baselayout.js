@@ -6,6 +6,7 @@
 
 
 import Header from '../shared/Header'
+import Footer from '../shared/Footer'
 
 
 //React functional component that holds both the page information passed as props.children and the Header Component, displayed on each page.
@@ -20,7 +21,9 @@ const BaseLayout = props=>{
             <div className = "wrapper">
             {children}
             </div>
+            <Footer/>
         </main>
+
         </div>
 
 

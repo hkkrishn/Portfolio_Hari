@@ -68,7 +68,6 @@ const Index=()=>{
                     <h1 style = {{marginTop:"40px"}}>
                       <span style = {{fontWeight:"bold",fontStyle: "italic"}}>discover,interact and collaborate on</span>  projects I have worked on!
                     </h1>
-                    <img style = {{height:"215px",marginLeft:"100px"}} src="https://i.ibb.co/34jPwwc/Full-Color-Transparent-Bg-1280x1024-72dpi.png" alt="React Logo" />
 
                   </div>
                 </Col>
