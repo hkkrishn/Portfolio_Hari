@@ -7,13 +7,16 @@ import React,{Component} from 'react';
 import BaseLayout from '@/components/layouts/baselayout';
 import BasePage from '@/components/BasePage';
 import {withAuth} from '@/HOC/withAuth'
-
 import { Row, Col } from 'reactstrap';
 import PortfolioForm from '@/components/PortfolioForm';
 
 //functional component that holds the base layout component as well as information of page that is passed down as props.children
 
 const  PortfolioNew = ({user,loading})=>{
+
+    const createPortfolio = (data) => {
+        alert(JSON.stringify(data));
+      }
 
     return(
       <BaseLayout
@@ -22,7 +25,7 @@ const  PortfolioNew = ({user,loading})=>{
         <BasePage header = "Add New Project">
         <Row>
           <Col md="8">
-            <PortfolioForm />
+            <PortfolioForm onSubmit={createPortfolio}/>
           </Col>
         </Row>
 
