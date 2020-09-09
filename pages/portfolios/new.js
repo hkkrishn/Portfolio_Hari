@@ -14,6 +14,7 @@ import PortfolioForm from '@/components/PortfolioForm';
 
 const  PortfolioNew = ({user,loading})=>{
 
+    //this function is passed by props and executed on form submit by PortfolioForm
     const createPortfolio = (data) => {
         alert(JSON.stringify(data));
       }
