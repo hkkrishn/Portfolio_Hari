@@ -10,13 +10,15 @@ import {withAuth} from '@/HOC/withAuth'
 import { Row, Col } from 'reactstrap';
 import PortfolioForm from '@/components/PortfolioForm';
 
+import {createPortfolio} from '@/actions/portfolios'
+
 //functional component that holds the base layout component as well as information of page that is passed down as props.children
 
 const  PortfolioNew = ({user,loading})=>{
 
     //this function is passed by props and executed on form submit by PortfolioForm
-    const createPortfolio = (data) => {
-        alert(JSON.stringify(data));
+    const _createPortfolio = (data) => {
+        createPortfolio()
       }
 
     return(
@@ -26,7 +28,7 @@ const  PortfolioNew = ({user,loading})=>{
         <BasePage header = "Add New Project">
         <Row>
           <Col md="8">
-            <PortfolioForm onSubmit={createPortfolio}/>
+            <PortfolioForm onSubmit={_createPortfolio}/>
           </Col>
         </Row>
 
