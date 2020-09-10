@@ -10,12 +10,17 @@ import {withAuth} from '@/HOC/withAuth'
 import { Row, Col } from 'reactstrap';
 import PortfolioForm from '@/components/PortfolioForm';
 
-import {createPortfolio} from '@/actions/portfolios'
+import { useCreatePortfolio } from '@/actions/portfolios';
 
 //functional component that holds the base layout component as well as information of page that is passed down as props.children
 
 const  PortfolioNew = ({user,loading})=>{
 
+  //import custom hook useCreatePortfolio
+  //when this hook is called it will return the function create portfolio as indicated on line 24
+  //and an object that includes the data,loading and error as retrieved by useGetUser hook
+
+  const [createPortfolio, {data, loading, error}] = useCreatePortfolio();
     //this function is passed by props and executed on form submit by PortfolioForm
     const _createPortfolio = (data) => {
         createPortfolio(data)

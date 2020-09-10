@@ -4,7 +4,41 @@
 //Description: action to send data back from create project page to db
 
 import axios from 'axios';
+import { useState } from 'react';
 
-export function createPortfolio(data) {
+const createPortfolio=(data)=> {
   return axios.post('/api/v1/portfolios', data);
+}
+
+export const  useCreatePortfolio=()=>{
+
+  //call useState to save request state vals
+  const [reqState, setReqState] = useState({
+    error: null,
+    data: null,
+    loading: false
+  });
+
+
+
+
+
+  const createPortfolioHandler = async (...data) => {
+
+    //set the initial request object
+    setReqState({error: null, data: null, loading: true});
+    try {
+      const json = await createPortfolio(...data);
+
+      setReqState({error: null, data: json.data, loading: false});
+    } catch(e) {
+
+      const message = (e.response && e.response.message) || 'There seems to be an error, something went wrong...';
+      setReqState({error: message, data: null, loading: false});
+    }
+  }
+
+  //return the array that return a function and the request object which
+  //includes data
+  return [createPortfolioHandler, {...reqState}]
 }
