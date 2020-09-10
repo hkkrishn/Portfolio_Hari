@@ -14,11 +14,14 @@ const auth0 =  initAuth0({
   clientId: process.env.NEXT_PUBLIC_DEVELOPMENT_AUTH0_CLIENTID,
   clientSecret: process.env.NEXT_PUBLIC_DEVELOPMENT_AUTH0_CLIENTSECRET,
   scope: 'openid profile',
+  audience: process.env.NEXT_PUBLIC_DEVELOPMENT_AUTH0_AUDIENCE,
   redirectUri: process.env.NEXT_PUBLIC_DEVELOPMENT_AUTH0_REDIRECTURI,
   postLogoutRedirectUri: process.env.NEXT_PUBLIC_DEVELOPMENT_AUTH0_POSTLOGOUTREDIRECTURI,
   session: {
     // The secret used to encrypt the cookie.
     cookieSecret: process.env.NEXT_PUBLIC_DEVELOPMENT_AUTH0_COOKIESECRET,
+    //session object will now contain the access token
+    storeAccessToken: true
   }
 });
 
