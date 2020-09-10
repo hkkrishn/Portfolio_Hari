@@ -18,7 +18,7 @@ const  PortfolioNew = ({user,loading})=>{
 
     //this function is passed by props and executed on form submit by PortfolioForm
     const _createPortfolio = (data) => {
-        createPortfolio()
+        createPortfolio(data)
       }
 
     return(

@@ -5,14 +5,15 @@
 
 import PortfolioAPI from '@/lib/api/portfolios';
 
-const createPortfolio = async(req, res)=> {
+
+
+export default async function createPortfolio(req, res) {
   try {
     const data = req.body;
     await new PortfolioAPI().createPortfolio(data);
-    return res.json({message: 'Project was created!'});
+    return res.json({message: 'Portfolio was created!'});
   } catch(e) {
     return res.status(e.status || 400).end(e.message);
   }
 }
 
-export default createPortfolio
