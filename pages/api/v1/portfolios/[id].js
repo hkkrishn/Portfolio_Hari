@@ -1,11 +1,12 @@
+
 //Author:Harikrishnan Kuppusamykrishnan
 //Project: Portfolio Website
 //Date: 08/06/2020
-//Description: Create API route
+//Description:Portdolio dynamic edit api route.
 
-import PortfolioApi from '@/lib/api/portfolios';
+import PortfolioAPI from '@/lib/api/portfolios';
 
-export  const  handlePortfolio = async (req, res)=> {
-  const json = await new PortfolioApi().getById(req.query.id);
+export default async function handlePortfolio(req, res) {
+  const json = await new PortfolioAPI().getById(req.query.id);
   return res.json(json.data);
 }
