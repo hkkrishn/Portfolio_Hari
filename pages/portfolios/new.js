@@ -9,12 +9,13 @@ import BasePage from '@/components/BasePage';
 import {withAuth} from '@/HOC/withAuth'
 import { Row, Col } from 'reactstrap';
 import PortfolioForm from '@/components/PortfolioForm';
+import Redirect from '@/components/shared/Redirect';
 
 import { useCreatePortfolio } from '@/actions/portfolios';
 
 //functional component that holds the base layout component as well as information of page that is passed down as props.children
 
-const  PortfolioNew = ({user,loading})=>{
+const  PortfolioNew = ({user,loading2})=>{
 
   //import custom hook useCreatePortfolio
   //when this hook is called it will return the function create portfolio as indicated on line 24
@@ -22,18 +23,16 @@ const  PortfolioNew = ({user,loading})=>{
 
   const [createPortfolio, {data, loading, error}] = useCreatePortfolio();
     //this function is passed by props and executed on form submit by PortfolioForm
-    const _createPortfolio = (data) => {
-        createPortfolio(data)
-      }
-
+    if (data) { return <Redirect to="/portfolios" /> }
     return(
       <BaseLayout
       user = {user}
-      loading = {loading}>
+      loading = {loading2}>
         <BasePage header = "Add New Project">
         <Row>
           <Col md="8">
-            <PortfolioForm onSubmit={_createPortfolio}/>
+          <PortfolioForm onSubmit={createPortfolio} />
+            { error && <div className="alert alert-danger mt-2">{error}</div>}
           </Col>
         </Row>
 
