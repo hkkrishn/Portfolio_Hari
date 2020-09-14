@@ -6,8 +6,10 @@ import DatePicker from "react-datepicker";
 import { useForm } from "react-hook-form";
 import {useState,useEffect} from 'react'
 
-const PortfolioForm = ({onSubmit}) => {
-    const { register, handleSubmit,setValue } = useForm();
+const PortfolioForm = ({onSubmit,initialData = {}}) => {
+
+  //can pass config object via reac-hook-form
+    const { register, handleSubmit,setValue } = useForm({defaultValues:initialData});
     const [startDate,setStartDate] = useState(null);
     const[endDate,setEndDate] = useState(null)
 
@@ -17,6 +19,15 @@ const PortfolioForm = ({onSubmit}) => {
         register({name:'startDate'});
         register({name:'endDate'});
     },[register])
+
+
+    //useEffect to retrieve startDate and endDate
+    useEffect(()=>{
+      const [startDate,endDate] = initialData;
+      //construct new Date component and pass the startDate
+      if (startDate) { setStartDate(new Date(startDate))}
+      if (endDate) { setEndDate(new Date(endDate))}
+    },[initialData])
 
     //function to handle startDate and endDate and them to state using react hooks
     // this function employs a closure to pass down a function to date
