@@ -13,6 +13,7 @@ import { useGetPortfolio } from '@/actions/portfolios'
 import PortfolioForm from '@/components/PortfolioForm';
 import { Row, Col } from 'reactstrap';
 import { useUpdatePortfolio} from '@/actions/portfolios';
+import { toast } from 'react-toastify';
 
 //functional component
 
@@ -22,10 +23,14 @@ const PortfolioEdit = ({user}) => {
 
     //useGetPortfolio retrieves data and passes the data as initialData prop to PortfolioFom, this in turn will prefill the form
 
-    const [ updatePortfolio, {data, error, loading}] = useUpdatePortfolio();
+    const [ updatePortfolio, {error}] = useUpdatePortfolio();
   const { data: initialData } = useGetPortfolio(router.query.id);
-  const _updatePortfolio = (data) => {
-    updatePortfolio(router.query.id, data);
+
+
+  const _updatePortfolio = async (data) => {
+    updatePortfolio(router.query.id, data)
+      .then(() => toast.success('Portfolio has been updated!', {autoClose: 2000}))
+      .catch(() => toast.error('Please check if all fields are filled!', {autoClose: 2000}))
   }
 
     return (
@@ -40,6 +45,9 @@ const PortfolioEdit = ({user}) => {
                     />
 
                     }
+                    { error &&
+              <div className="alert alert-danger mt-2">{error}</div>
+            }
 
                 </Col>
             </Row>

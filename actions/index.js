@@ -34,11 +34,13 @@ export const  useApiHandler=(apiCall)=>{
     try {
       const json = await apiCall(...data);
       setReqState({error: null, data: json.data, loading: false});
+      return json.data;
     } catch(e) {
       //check if there is an error resonse and response message else return custom message
       const message = (e.response && e.response.data) || 'Ooops, something went wrong...';
       //add the message to the request object.
       setReqState({error: message, data: null, loading: false});
+      return Promise.reject(message);
     }
   }
   //return the array that return a function and the request object which
