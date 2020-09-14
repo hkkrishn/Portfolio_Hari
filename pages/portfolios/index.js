@@ -10,8 +10,9 @@ import Link from 'next/link';
 import PortfolioAPI from '@/lib/api/portfolios'
 import {useGetUser} from '@/actions/user';
 import {useRouter} from 'next/router'
-import { Row, Col, Card, CardHeader, CardBody, CardText, CardTitle } from 'reactstrap';
+import { Row, Col, Card, CardHeader, CardBody, CardText, CardTitle,Button } from 'reactstrap';
 import PortfolioCard from '@/components/PortfolioCard'
+import { isAuthorized } from '@/utils/auth0';
 
 
 
@@ -51,7 +52,21 @@ const Portfolios=({portfolios})=>{
               router.push('/portfolios/[id]',`/portfolios/${portfolio._id}`)
             }}
              md="4">
-            <PortfolioCard portfolio = {portfolio}/>
+            <PortfolioCard
+                portfolio={portfolio}>
+                { dataUser && isAuthorized(dataUser, 'admin') &&
+                  <>
+                    <Button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        router.push('/portfolios/[id]/edit', `/portfolios/${portfolio._id}/edit`)
+                      }}
+                      className="mr-2"
+                      color="warning">Edit</Button>
+                    <Button color="danger">Delete</Button>
+                  </>
+                }
+              </PortfolioCard>
             </Col>)
 
           }
