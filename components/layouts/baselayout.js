@@ -7,6 +7,7 @@
 
 import Header from '../shared/Header'
 import Footer from '../shared/Footer'
+import { ToastContainer } from 'react-toastify';
 
 
 //React functional component that holds both the page information passed as props.children and the Header Component, displayed on each page.
@@ -23,7 +24,7 @@ const BaseLayout = props=>{
             </div>
             <Footer/>
         </main>
-
+        <ToastContainer />
         </div>
 
 
