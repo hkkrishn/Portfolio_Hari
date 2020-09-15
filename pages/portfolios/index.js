@@ -12,6 +12,7 @@ import {useGetUser} from '@/actions/user';
 import {useRouter} from 'next/router'
 import { Row, Col, Card, CardHeader, CardBody, CardText, CardTitle,Button } from 'reactstrap';
 import PortfolioCard from '@/components/PortfolioCard'
+import { useDeletePortfolio } from '@/actions/portfolios';
 import { isAuthorized } from '@/utils/auth0';
 
 
@@ -21,8 +22,16 @@ import { isAuthorized } from '@/utils/auth0';
 const Portfolios=({portfolios})=>{
     const router = useRouter()
     const {data:dataUser,loading:loadingUser}  = useGetUser();
+    const [deletePortfolio, {data, error}] = useDeletePortfolio();
 
-
+    //function to delete portfolios
+    const _deletePortfolio = async (e, portfolioId) => {
+      e.stopPropagation();
+      const isConfirm = confirm('Are you sure you want to delete this project?');
+      if (isConfirm) {
+        await deletePortfolio(portfolioId);
+      }
+    }
     //Function to render posts via li tags.
     const renderPortfolios=(portfolios)=>{
       return portfolios.map(portfolio=>{
@@ -63,7 +72,9 @@ const Portfolios=({portfolios})=>{
                       }}
                       className="mr-2"
                       color="warning">Edit</Button>
-                    <Button color="danger">Delete</Button>
+                     <Button
+                      onClick={(e) => _deletePortfolio(e, portfolio._id)}
+                      color="danger">Delete</Button>
                   </>
                 }
               </PortfolioCard>
