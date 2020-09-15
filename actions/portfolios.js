@@ -13,13 +13,14 @@ const createPortfolio=(data)=> {
 }
 
 const updatePortfolio = (id, data) => axios.patch(`/api/v1/portfolios/${id}`, data);
+const deletePortfolio = (id) => axios.delete(`/api/v1/portfolios/${id}`);
 
 
 export const useCreatePortfolio = ()=>{
   return useApiHandler(createPortfolio)
 }
 export const useUpdatePortfolio = () => useApiHandler(updatePortfolio);
-
+export const useDeletePortfolio = () => useApiHandler(deletePortfolio);
 export const useGetPortfolio = (id) => {
   console.log('GET PORTFOLIO')
   const { data, error, ...rest} = useSWR(id ? `/api/v1/portfolios/${id}` : null, fetcher);

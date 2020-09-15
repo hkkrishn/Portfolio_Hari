@@ -14,6 +14,7 @@ export default async function handlePortfolio(req, res) {
     return res.json(json.data);
   }
 
+  //handle update function
   if (req.method === 'PATCH') {
     try {
       const { accessToken } = await auth0.getSession(req);
@@ -22,5 +23,17 @@ export default async function handlePortfolio(req, res) {
     } catch(e) {
       return res.status(e.status || 422).json(e.response.data);
     }
+  }
+  //handle delete function
+  if (req.method === 'DELETE') {
+    try{
+      const { accessToken } = await auth0.getSession(req);
+    const json = await new PortfolioAPI(accessToken).delete(req.query.id);
+    return res.json(json.data);
+
+    }catch(e){
+      return res.status(e.status || 422).json(e.response.data);
+    }
+
   }
 }

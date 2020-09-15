@@ -7,28 +7,26 @@ import Redirect from '@/components/shared/Redirect'
 import {isAuthorized} from '@/utils/auth0'
 
 //Higher Order Component which checks to see if the user is authenticated and only displays the page if so
- export const withAuth = (Component)=>(role)=>{
-    return (props)=>{
-        const {data,loading} = useGetUser();
-        //auth check
-        if(loading){
-            return(
-                <p>Loading....</p>
-            )
-        } if(!data){
-            //redirect user if not authenticated via Redirect component
-            return <Redirect ssr to = "/api/v1/login" />
-
-          }else{
-              if( role && !isAuthorized(data,role)){
-                return <Redirect ssr to = "/api/v1/login" />
-              }
-            return(
-                <Component data = {data} loading = {loading} {...props}/>
-              )
-
-          }
-       return <Component {...props}/>
+ export const withAuth = Component => role => {
+   console.log(role)
+  return props => {
+    const { data, loading } = useGetUser();
+    if (loading) {
+      return <p>Loading...</p>
     }
+
+    if (!data) {
+      return <Redirect ssr to="/api/v1/login" />
+    } else {
+      if (role && !isAuthorized(data, role)) {
+        return <Redirect ssr to="/api/v1/login" />
+      }
+
+      return <Component user={data} loading={loading} {...props}/>
+    }
+  }
 }
+
+
+
 

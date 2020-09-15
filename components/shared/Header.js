@@ -4,31 +4,29 @@
 //Description: This is the Header component, it holds the main navbar
 
 import React,{Component,useState} from 'react'
+import { isAuthorized } from '@/utils/auth0';
 import Link from 'next/link'
 import {
     Collapse,
     Navbar,
     NavbarToggler,
-
     Nav,
     NavItem,
-    NavLink,
-    UncontrolledDropdown,
+    Dropdown,
     DropdownToggle,
     DropdownMenu,
-    DropdownItem,
-    NavbarText
+    DropdownItem
   } from 'reactstrap';
 
 
 //Helper component to create styled next.js links
 
 const HelperNavLink = (props)=>{
-    const {title,url} = props
 
+    const { url, title, className=''} = props;
     return (
         <Link  href={url}>
-          <a className="nav-link port-navbar-link">{title}</a>
+          <a className={`nav-link port-navbar-link ${className}`}>{title}</a>
         </Link>
       )
 }
@@ -59,6 +57,48 @@ const LoginOutLink = ()=>{
         <a className = "nav-link port-navbar-link" href = "/api/v1/logout">Log Out</a>
     )
 }
+
+//dropdown admin menu
+const AdminMenu = () => {
+    const [isOpen, setIsOpen] = useState(false);
+    return (
+      <Dropdown
+        className="port-navbar-link port-dropdown-menu"
+        nav
+        isOpen={isOpen}
+        toggle={(e) =>{
+
+          e.preventDefault()
+           setIsOpen(!isOpen)}}>
+           <DropdownToggle className="port-dropdown-toggle" nav caret>
+            Admin
+          </DropdownToggle>
+          <DropdownMenu right>
+            <DropdownItem>
+              <HelperNavLink
+                className="port-dropdown-item"
+                url="/portfolios/new"
+                title="Create Project"
+              />
+            </DropdownItem>
+            <DropdownItem>
+            <HelperNavLink
+              className="port-dropdown-item"
+              url="/blogs/editor"
+              title="Blog Editor"
+            />
+          </DropdownItem>
+          <DropdownItem>
+            <HelperNavLink
+              className="port-dropdown-item"
+              url="/blogs/dashboard"
+              title="Dashboard"
+            />
+          </DropdownItem>
+          </DropdownMenu>
+      </Dropdown>
+    )
+  }
 
 //Header React functional component that uses the Next.js Link Component to create a tags or links to all other pages
 
@@ -115,9 +155,13 @@ const Header = ({user,loading,className})=>{
                     {!loading &&
                     <>
                     { user &&
-                        <NavItem className="port-navbar-item">
-                            <LoginOutLink/>
-                        </NavItem>
+                    <>
+                    { isAuthorized(user, 'admin') === true ?( <AdminMenu />):(null)}
+                    <NavItem className="port-navbar-item">
+                      <LoginOutLink/>
+                    </NavItem>
+                    </>
+
 
                     }
                     {!user &&

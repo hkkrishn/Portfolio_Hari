@@ -4,6 +4,7 @@
 //Description: This is the portfolio page within the site that will contain all links to projects and render them.
 
 import React from 'react'
+import { useState } from 'react';
 import BaseLayout from '@/components/layouts/baselayout';
 import BasePage from '@/components/BasePage';
 import Link from 'next/link';
@@ -12,17 +13,29 @@ import {useGetUser} from '@/actions/user';
 import {useRouter} from 'next/router'
 import { Row, Col, Card, CardHeader, CardBody, CardText, CardTitle,Button } from 'reactstrap';
 import PortfolioCard from '@/components/PortfolioCard'
+import { useDeletePortfolio } from '@/actions/portfolios';
 import { isAuthorized } from '@/utils/auth0';
 
 
 
 //functional component that holds the base layout component as well as information of page that is passed down as props.children
 //SWR is added to gather data from cache before executing request for data that is validated to have changed
-const Portfolios=({portfolios})=>{
+const Portfolios = ({portfolios: initialPortfolios}) => {
     const router = useRouter()
+    const [portfolios, setPortfolios] = useState(initialPortfolios);
     const {data:dataUser,loading:loadingUser}  = useGetUser();
+    const [deletePortfolio, {data, error}] = useDeletePortfolio();
 
-
+    //function to delete portfolios
+    const _deletePortfolio = async (e, portfolioId) => {
+      e.stopPropagation();
+      const isConfirm = confirm('Are you sure you want to delete this project?');
+      if (isConfirm) {
+        await deletePortfolio(portfolioId);
+        //update state after deletion by removing project with id
+        setPortfolios(portfolios.filter(p => p._id !== portfolioId));
+      }
+    }
     //Function to render posts via li tags.
     const renderPortfolios=(portfolios)=>{
       return portfolios.map(portfolio=>{
@@ -63,7 +76,9 @@ const Portfolios=({portfolios})=>{
                       }}
                       className="mr-2"
                       color="warning">Edit</Button>
-                    <Button color="danger">Delete</Button>
+                     <Button
+                      onClick={(e) => _deletePortfolio(e, portfolio._id)}
+                      color="danger">Delete</Button>
                   </>
                 }
               </PortfolioCard>

@@ -8,6 +8,7 @@ import auth0 from '@/utils/auth0';
 
 //async function to issue get request to auth0.com/ endpoint
 const logout = async (req,res)=>{
+
     try{
         //handleLogin is a method from the auth0 package
         await auth0.handleLogout(req,res);
