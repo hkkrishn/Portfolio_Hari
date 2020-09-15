@@ -4,6 +4,7 @@
 //Description: This is the Header component, it holds the main navbar
 
 import React,{Component,useState} from 'react'
+import { isAuthorized } from '@/utils/auth0';
 import Link from 'next/link'
 import {
     Collapse,
@@ -65,18 +66,35 @@ const AdminMenu = () => {
         className="port-navbar-link port-dropdown-menu"
         nav
         isOpen={isOpen}
-        toggle={() => setIsOpen(!isOpen)}>
-          <DropdownToggle className="port-dropdown-toggle" nav carret>
+        toggle={(e) =>{
+
+          e.preventDefault()
+           setIsOpen(!isOpen)}}>
+           <DropdownToggle className="port-dropdown-toggle" nav caret>
             Admin
           </DropdownToggle>
-          <DropdownMenu>
+          <DropdownMenu right>
             <DropdownItem>
               <HelperNavLink
                 className="port-dropdown-item"
                 url="/portfolios/new"
-                title="Create Portfolio"
+                title="Create Project"
               />
             </DropdownItem>
+            <DropdownItem>
+            <HelperNavLink
+              className="port-dropdown-item"
+              url="/blogs/editor"
+              title="Blog Editor"
+            />
+          </DropdownItem>
+          <DropdownItem>
+            <HelperNavLink
+              className="port-dropdown-item"
+              url="/blogs/dashboard"
+              title="Dashboard"
+            />
+          </DropdownItem>
           </DropdownMenu>
       </Dropdown>
     )
@@ -138,7 +156,7 @@ const Header = ({user,loading,className})=>{
                     <>
                     { user &&
                     <>
-                    <AdminMenu/>
+                    { isAuthorized(user, 'admin') === true ?( <AdminMenu />):(null)}
                     <NavItem className="port-navbar-item">
                       <LoginOutLink/>
                     </NavItem>
