@@ -32,6 +32,7 @@ const Portfolios = ({portfolios: initialPortfolios}) => {
       const isConfirm = confirm('Are you sure you want to delete this project?');
       if (isConfirm) {
         await deletePortfolio(portfolioId);
+        //update state after deletion by removing project with id
         setPortfolios(portfolios.filter(p => p._id !== portfolioId));
       }
     }
