@@ -26,8 +26,14 @@ export default async function handlePortfolio(req, res) {
   }
   //handle delete function
   if (req.method === 'DELETE') {
-    const { accessToken } = await auth0.getSession(req);
+    try{
+      const { accessToken } = await auth0.getSession(req);
     const json = await new PortfolioAPI(accessToken).delete(req.query.id);
     return res.json(json.data);
+
+    }catch(e){
+      return res.status(e.status || 422).json(e.response.data);
+    }
+
   }
 }
