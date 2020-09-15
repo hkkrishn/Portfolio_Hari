@@ -4,6 +4,7 @@
 //Description: This is the portfolio page within the site that will contain all links to projects and render them.
 
 import React from 'react'
+import { useState } from 'react';
 import BaseLayout from '@/components/layouts/baselayout';
 import BasePage from '@/components/BasePage';
 import Link from 'next/link';
@@ -19,8 +20,9 @@ import { isAuthorized } from '@/utils/auth0';
 
 //functional component that holds the base layout component as well as information of page that is passed down as props.children
 //SWR is added to gather data from cache before executing request for data that is validated to have changed
-const Portfolios=({portfolios})=>{
+const Portfolios = ({portfolios: initialPortfolios}) => {
     const router = useRouter()
+    const [portfolios, setPortfolios] = useState(initialPortfolios);
     const {data:dataUser,loading:loadingUser}  = useGetUser();
     const [deletePortfolio, {data, error}] = useDeletePortfolio();
 
@@ -30,6 +32,7 @@ const Portfolios=({portfolios})=>{
       const isConfirm = confirm('Are you sure you want to delete this project?');
       if (isConfirm) {
         await deletePortfolio(portfolioId);
+        setPortfolios(portfolios.filter(p => p._id !== portfolioId));
       }
     }
     //Function to render posts via li tags.
