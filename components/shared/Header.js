@@ -9,26 +9,23 @@ import {
     Collapse,
     Navbar,
     NavbarToggler,
-
     Nav,
     NavItem,
-    NavLink,
-    UncontrolledDropdown,
+    Dropdown,
     DropdownToggle,
     DropdownMenu,
-    DropdownItem,
-    NavbarText
+    DropdownItem
   } from 'reactstrap';
 
 
 //Helper component to create styled next.js links
 
 const HelperNavLink = (props)=>{
-    const {title,url} = props
 
+    const { url, title, className=''} = props;
     return (
         <Link  href={url}>
-          <a className="nav-link port-navbar-link">{title}</a>
+          <a className={`nav-link port-navbar-link ${className}`}>{title}</a>
         </Link>
       )
 }
@@ -59,6 +56,31 @@ const LoginOutLink = ()=>{
         <a className = "nav-link port-navbar-link" href = "/api/v1/logout">Log Out</a>
     )
 }
+
+//dropdown admin menu
+const AdminMenu = () => {
+    const [isOpen, setIsOpen] = useState(false);
+    return (
+      <Dropdown
+        className="port-navbar-link port-dropdown-menu"
+        nav
+        isOpen={isOpen}
+        toggle={() => setIsOpen(!isOpen)}>
+          <DropdownToggle className="port-dropdown-toggle" nav carret>
+            Admin
+          </DropdownToggle>
+          <DropdownMenu>
+            <DropdownItem>
+              <HelperNavLink
+                className="port-dropdown-item"
+                url="/portfolios/new"
+                title="Create Portfolio"
+              />
+            </DropdownItem>
+          </DropdownMenu>
+      </Dropdown>
+    )
+  }
 
 //Header React functional component that uses the Next.js Link Component to create a tags or links to all other pages
 
@@ -115,9 +137,13 @@ const Header = ({user,loading,className})=>{
                     {!loading &&
                     <>
                     { user &&
-                        <NavItem className="port-navbar-item">
-                            <LoginOutLink/>
-                        </NavItem>
+                    <>
+                    <AdminMenu/>
+                    <NavItem className="port-navbar-item">
+                      <LoginOutLink/>
+                    </NavItem>
+                    </>
+
 
                     }
                     {!user &&
