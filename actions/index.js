@@ -45,6 +45,6 @@ export const  useApiHandler=(apiCall)=>{
   }
   //return the array that return a function and the request object which
   //includes data
-  //spread the request object to grab all fieldsß
+  //spread the request object to grab all fields
   return [handler, {...reqState}]
 }
